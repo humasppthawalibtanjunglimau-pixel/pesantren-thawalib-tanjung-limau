@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel | Pesantren Thawalib</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#d1fae5',
+            gold: '#facc15'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-secondary min-h-screen">
+
+  <!-- HEADER -->
+  <header class="bg-primary text-white px-6 py-4 flex justify-between">
+    <h1 class="text-xl font-bold">Dashboard Admin</h1>
+    <button id="logoutBtn" class="bg-gold text-primary px-4 py-1 rounded">
+      Logout
+    </button>
+  </header>
+
+  <!-- MAIN -->
+  <main class="p-6 max-w-7xl mx-auto">
+
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <h2 class="text-2xl font-bold text-primary">
+        Selamat Datang, Admin
+      </h2>
+      <p class="text-gray-600">
+        Anda memiliki akses penuh untuk mengelola sistem pesantren.
+      </p>
+    </div>
+
+    <!-- MENU ADMIN -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <a href="#" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-primary">👤 Kelola Pengguna</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Atur role dan status user
+        </p>
+      </a>
+
+      <a href="#" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-primary">🏫 Kelola Kelas</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Tambah dan edit data kelas
+        </p>
+      </a>
+
+      <a href="#" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-primary">👨‍🏫 Kelola Guru</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Data guru dan jabatan
+        </p>
+      </a>
+
+      <a href="#" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-primary">👨‍🎓 Kelola Siswa</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Data siswa dan wali
+        </p>
+      </a>
+
+      <a href="#" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-primary">📊 Database</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Lihat data keseluruhan
+        </p>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- FIREBASE ROLE CHECK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "ISI_API_KEY",
+      authDomain: "ISI_AUTH_DOMAIN",
+      projectId: "ISI_PROJECT_ID",
+      storageBucket: "ISI_STORAGE",
+      messagingSenderId: "ISI_SENDER_ID",
+      appId: "ISI_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const snap = await getDoc(doc(db, "users", user.uid));
+
+      if (!snap.exists() || snap.data().role !== "admin") {
+        alert("Akses ditolak! Halaman khusus admin.");
+        window.location.href = "dashboard.html";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    });
+  </script>
+
+</body>
+</html>
 
