@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | Pesantren Thawalib</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Warna Islami -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#d1fae5',
+            gold: '#facc15'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-secondary min-h-screen">
+
+  <!-- HEADER -->
+  <header class="bg-primary text-white shadow">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">Dashboard Pesantren</h1>
+      <button id="logoutBtn" class="bg-gold text-primary px-4 py-2 rounded-lg font-semibold">
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- SAMBUTAN -->
+    <div class="bg-white rounded-xl shadow p-6 mb-8">
+      <h2 class="text-2xl font-bold text-primary mb-2">
+        Assalamu’alaikum 👋
+      </h2>
+      <p class="text-gray-600">
+        Selamat datang di Sistem Informasi Pondok Pesantren Thawalib Tanjung Limau.
+      </p>
+    </div>
+
+    <!-- MENU UTAMA -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">📊 Data Siswa</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Lihat dan kelola data siswa
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">📚 Akademik</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Kelas, mata pelajaran, jadwal
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">👨‍🏫 Guru</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Jurnal mengajar & nilai
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">👨‍🎓 Siswa</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Absensi, tugas, pelanggaran
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">🏆 Prestasi</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Prestasi & penghargaan siswa
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg">
+        <h3 class="text-xl font-semibold text-primary">📢 HUMAS</h3>
+        <p class="text-sm text-gray-600 mt-2">
+          Informasi & pengumuman
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-primary text-white text-center py-4 text-sm">
+    © 2026 Pondok Pesantren Thawalib Tanjung Limau
+  </footer>
+
+  <!-- FIREBASE LOGOUT -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "ISI_API_KEY",
+      authDomain: "ISI_AUTH_DOMAIN",
+      projectId: "ISI_PROJECT_ID",
+      storageBucket: "ISI_STORAGE",
+      messagingSenderId: "ISI_SENDER_ID",
+      appId: "ISI_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    });
+  </script>
+
+</body>
+</html>
 
