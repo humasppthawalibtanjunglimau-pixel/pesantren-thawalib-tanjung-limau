@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pondok Pesantren Thawalib Tanjung Limau</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS CDN (GRATIS) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Warna Islami -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#d1fae5',
+            gold: '#facc15'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-secondary text-gray-800">
+
+  <!-- HEADER -->
+  <header class="bg-primary text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold">Pondok Pesantren Thawalib</h1>
+        <p class="text-sm text-secondary">Tanjung Limau</p>
+      </div>
+      <a href="login.html" class="bg-gold text-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300">
+        Login
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-white py-14">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-primary mb-4">
+        Selamat Datang di Sistem Informasi Pesantren
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Sistem terpadu Pondok Pesantren Thawalib Tanjung Limau untuk pengelolaan
+        akademik, siswa, guru, dan manajemen pesantren secara modern dan islami.
+      </p>
+    </div>
+  </section>
+
+  <!-- DATA KELAS -->
+  <section class="py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-2xl font-bold text-primary mb-6">Data Siswa per Kelas</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- CARD KELAS -->
+        <div class="bg-white rounded-xl shadow p-6">
+          <h4 class="text-xl font-semibold">Kelas VII A</h4>
+          <p class="mt-2">Jumlah Siswa: <b>32</b></p>
+          <p>Wali Kelas: <b>Ust. Ahmad</b></p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+          <h4 class="text-xl font-semibold">Kelas VIII B</h4>
+          <p class="mt-2">Jumlah Siswa: <b>30</b></p>
+          <p>Wali Kelas: <b>Ustz. Fatimah</b></p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+          <h4 class="text-xl font-semibold">Kelas IX A</h4>
+          <p class="mt-2">Jumlah Siswa: <b>28</b></p>
+          <p>Wali Kelas: <b>Ust. Yusuf</b></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESTASI SISWA -->
+  <section class="bg-white py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-2xl font-bold text-primary mb-6">Prestasi Siswa</h3>
+
+      <ul class="space-y-4">
+        <li class="border-l-4 border-primary pl-4">
+          🏆 Juara 1 MTQ Tingkat Kabupaten
+        </li>
+        <li class="border-l-4 border-primary pl-4">
+          🥇 Juara Olimpiade Matematika
+        </li>
+        <li class="border-l-4 border-primary pl-4">
+          🌙 Hafalan 30 Juz Al-Qur’an
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SAMBUTAN PIMPINAN -->
+  <section class="py-14">
+    <div class="max-w-4xl mx-auto px-6 text-center bg-primary text-white rounded-2xl p-10 shadow-lg">
+      <h3 class="text-2xl font-bold mb-4">Sambutan Pimpinan Pondok</h3>
+      <p class="text-secondary">
+        Semoga sistem ini menjadi sarana pelayanan pendidikan yang amanah,
+        profesional, dan membawa keberkahan bagi seluruh civitas akademika
+        Pondok Pesantren Thawalib Tanjung Limau.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-primary text-white py-6">
+    <div class="text-center text-sm">
+      © 2026 Pondok Pesantren Thawalib Tanjung Limau<br>
+      Sistem Informasi Pesantren
+    </div>
+  </footer>
+
+</body>
+</html>
 
