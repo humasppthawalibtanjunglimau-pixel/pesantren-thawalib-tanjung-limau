@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kelola Kelas | Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#d1fae5',
+            gold: '#facc15'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-secondary min-h-screen">
+
+  <!-- HEADER -->
+  <header class="bg-primary text-white px-6 py-4 flex justify-between">
+    <h1 class="text-xl font-bold">Kelola Data Kelas</h1>
+    <a href="admin.html" class="bg-gold text-primary px-4 py-1 rounded">
+      Kembali
+    </a>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-xl mx-auto p-6">
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h2 class="text-xl font-bold text-primary mb-4">Tambah Kelas</h2>
+
+      <form id="kelasForm" class="space-y-4">
+
+        <div>
+          <label class="block text-sm font-semibold">Nama Kelas</label>
+          <input type="text" id="nama_kelas" placeholder="VII A"
+            class="w-full border px-3 py-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold">Tingkat</label>
+          <select id="tingkat" class="w-full border px-3 py-2 rounded" required>
+            <option value="">-- Pilih --</option>
+            <option value="MTs">MTs</option>
+            <option value="MA">MA</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold">Jumlah Siswa</label>
+          <input type="number" id="jumlah_siswa" placeholder="32"
+            class="w-full border px-3 py-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold">Wali Kelas</label>
+          <input type="text" id="wali_kelas" placeholder="Ust. Ahmad"
+            class="w-full border px-3 py-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold">Tahun Ajaran</label>
+          <input type="text" id="tahun_ajaran" placeholder="2025/2026"
+            class="w-full border px-3 py-2 rounded" required>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-primary text-white py-2 rounded font-semibold">
+          Simpan Kelas
+        </button>
+
+      </form>
+
+      <p id="status" class="text-center text-sm mt-4"></p>
+    </div>
+
+  </main>
+
+  <!-- FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "ISI_API_KEY",
+      authDomain: "ISI_AUTH_DOMAIN",
+      projectId: "ISI_PROJECT_ID",
+      storageBucket: "ISI_STORAGE",
+      messagingSenderId: "ISI_SENDER_ID",
+      appId: "ISI_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Pastikan admin login
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.href = "login.html";
+    });
+
+    // Simpan kelas
+    document.getElementById("kelasForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        nama_kelas: document.getElementById("nama_kelas").value,
+        tingkat: document.getElementById("tingkat").value,
+        jumlah_siswa: Number(document.getElementById("jumlah_siswa").value),
+        wali_kelas: document.getElementById("wali_kelas").value,
+        tahun_ajaran: document.getElementById("tahun_ajaran").value
+      };
+
+      try {
+        await addDoc(collection(db, "kelas"), data);
+        document.getElementById("status").innerText = "✅ Data kelas berhasil disimpan";
+        document.getElementById("kelasForm").reset();
+      } catch (error) {
+        document.getElementById("status").innerText = "❌ Gagal menyimpan data";
+      }
+    });
+  </script>
+
+</body>
+</html>
